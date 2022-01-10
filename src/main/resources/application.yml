@@ -1,2 +1,12 @@
 server:
   port: 8090
+
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    exchange-name: ${EXCHANGE_NAME:service.exchange}
+    queue-name: ${QUEUE_NAME:notification}
+    queue-binding-key: ${QUEUE_BINDING_KEY:notification.message}
