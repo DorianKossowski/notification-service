@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 class MailNotificationSender : NotificationSender {
 
     override fun send(to: String, subject: String, message: String) {
-        TODO("Not yet implemented")
+        // TODO
     }
 
     override fun canSend(notificationType: NotificationType) = NotificationType.MAIL == notificationType
