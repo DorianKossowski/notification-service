@@ -10,3 +10,14 @@ spring:
     exchange-name: ${EXCHANGE_NAME:service.exchange}
     queue-name: ${QUEUE_NAME:notification}
     queue-binding-key: ${QUEUE_BINDING_KEY:notification.message}
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_AUTH:false}
+          starttls.enable: ${MAIL_TTLS:true}
+    from: ${MAIL_FROM:testing@from.com}
