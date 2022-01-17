@@ -1,7 +1,18 @@
 server:
   port: 8090
 
+management:
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
 spring:
+  webflux:
+    base-path: /api/v1
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}

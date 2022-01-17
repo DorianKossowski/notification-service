@@ -1,5 +1,6 @@
 package com.codibly_doko.notificationservice.sender
 
+import com.codibly_doko.notificationservice.service.MetricsService
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
 import org.mockito.kotlin.verify
@@ -16,7 +17,8 @@ internal class MailNotificationSenderTest {
     }
 
     private val javaMailSender = mock(JavaMailSender::class.java, RETURNS_DEEP_STUBS)
-    private val mailNotificationSender = spy(MailNotificationSender(javaMailSender, FROM))
+    private val metricsService = mock(MetricsService::class.java)
+    private val mailNotificationSender = spy(MailNotificationSender(javaMailSender, FROM, metricsService))
 
     @Test
     internal fun shouldSendMail() {
@@ -31,6 +33,7 @@ internal class MailNotificationSenderTest {
 
         // then
         verify(javaMailSender).send(mimeMessage)
+        verify(metricsService).incrementSentMails()
         verify(mimeMessageHelper).setFrom(FROM)
         verify(mimeMessageHelper).setTo(TO)
         verify(mimeMessageHelper).setSubject(SUBJECT)

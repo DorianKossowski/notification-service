@@ -2,6 +2,8 @@
 
 Service responsible for sending notifications.
 
+---
+
 ## Environment variables
 
 * RabbitMQ variables
@@ -20,3 +22,20 @@ Service responsible for sending notifications.
     * `MAIL_AUTH` - enable smtp server authentication, default `false`
     * `MAIL_TTLS` - enable a TLS-protected connection, default `true`
     * `MAIL_FROM` - from mail address, default `testing@from.com`
+
+---
+
+### Health check endpoint
+
+Health check endpoint is on `/api/v1/actuator/health`
+
+---
+
+### Metrics endpoint
+
+Prometheus metrics endpoint is on `/api/v1/actuator/prometheus`
+Metrics collected:
+
+```
+sent_mails - number of successfuly sent mails
+```
