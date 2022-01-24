@@ -33,17 +33,15 @@ class RabbitMQConfiguration(private val rabbitMQProperties: RabbitMQProperties) 
             .with(rabbitMQProperties.queueBindingKey)
 
     @Bean
-    fun rabbitTemplate(connectionFactory: ConnectionFactory): RabbitTemplate {
-        val rabbitTemplate = RabbitTemplate(connectionFactory)
-        rabbitTemplate.messageConverter = Jackson2JsonMessageConverter(jacksonObjectMapper())
-        return rabbitTemplate
-    }
+    fun rabbitTemplate(connectionFactory: ConnectionFactory): RabbitTemplate =
+        RabbitTemplate(connectionFactory).apply {
+            messageConverter = Jackson2JsonMessageConverter(jacksonObjectMapper())
+        }
 
     @Bean
-    fun rabbitListenerContainerFactory(connectionFactory: ConnectionFactory): SimpleRabbitListenerContainerFactory {
-        val factory = SimpleRabbitListenerContainerFactory()
-        factory.setConnectionFactory(connectionFactory)
-        factory.setMessageConverter(Jackson2JsonMessageConverter(jacksonObjectMapper()))
-        return factory
-    }
+    fun rabbitListenerContainerFactory(connectionFactory: ConnectionFactory): SimpleRabbitListenerContainerFactory =
+        SimpleRabbitListenerContainerFactory().apply {
+            setConnectionFactory(connectionFactory)
+            setMessageConverter(Jackson2JsonMessageConverter(jacksonObjectMapper()))
+        }
 }

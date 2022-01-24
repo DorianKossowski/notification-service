@@ -18,11 +18,12 @@ class MailNotificationSender(
 
     override fun send(to: String, subject: String, message: String) {
         val mimeMessage: MimeMessage = mailSender.createMimeMessage()
-        val helper = getMimeMessageHelper(mimeMessage)
-        helper.setFrom(from)
-        helper.setTo(to)
-        helper.setSubject(subject)
-        helper.setText(message, true)
+        with(getMimeMessageHelper(mimeMessage)) {
+            setFrom(from)
+            setTo(to)
+            setSubject(subject)
+            setText(message, true)
+        }
         mailSender.send(mimeMessage)
         metricsService.incrementSentMails()
     }

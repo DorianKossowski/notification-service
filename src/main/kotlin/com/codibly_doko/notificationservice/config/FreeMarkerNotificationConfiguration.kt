@@ -14,10 +14,11 @@ class FreeMarkerNotificationConfiguration {
 
     @Bean
     fun freeMarkerConfigurer(): FreeMarkerConfigurer {
-        val configuration = Configuration(VERSION_2_3_27)
-        configuration.templateLoader = ClassTemplateLoader(javaClass, "/$RESOURCE_DIR_NAME")
-        val freeMarkerConfigurer = FreeMarkerConfigurer()
-        freeMarkerConfigurer.configuration = configuration
-        return freeMarkerConfigurer
+        val configuration = Configuration(VERSION_2_3_27).apply {
+            this.templateLoader = ClassTemplateLoader(javaClass, "/$RESOURCE_DIR_NAME")
+        }
+        return FreeMarkerConfigurer().apply {
+            this.configuration = configuration
+        }
     }
 }
